@@ -14,13 +14,16 @@ interface ItemProps {
 }
 
 export default component$<ItemProps>((props) => {
-   const getPriceRange = (num) => {
+   const getPriceRange = (num: number) => {
       let str = "";
       for (let i = 1; i <= num; i++) {
          str += "$";
       }
       return str;
    };
+   const generateKey = () =>
+      `key-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
    return (
       <>
          <article class={styles.card_container}>
@@ -34,7 +37,7 @@ export default component$<ItemProps>((props) => {
                </span>
                <ul class={styles.kitchen_list}>
                   {props.kitchen_list.map((kitchen_name) => (
-                     <li>{kitchen_name}</li>
+                     <li key={generateKey()}>{kitchen_name}</li>
                   ))}
                </ul>
             </header>

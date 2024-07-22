@@ -127,6 +127,9 @@ export default component$(() => {
       },
    ];
 
+   const generateKey = () =>
+      `key-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
    return (
       <>
          <main class={styles.content}>
@@ -149,6 +152,7 @@ export default component$(() => {
                   <h3 class="invisible">Карточки товара для партнеров</h3>
                   {dataPartners.map((partner) => (
                      <Card_medium
+                        key={generateKey()}
                         imageSrc={partner.imageSrc}
                         name={partner.name}
                         place={partner.place}
@@ -181,6 +185,7 @@ export default component$(() => {
                   </h3>
                   {dataTeamRestaurants.map((partner) => (
                      <Card_medium
+                        key={generateKey()}
                         imageSrc={partner.imageSrc}
                         name={partner.name}
                         place={partner.place}
@@ -204,6 +209,7 @@ export default component$(() => {
                   </h3>
                   {dataAllRestaurants.map((restaurant) => (
                      <Card_big
+                        key={generateKey()}
                         imageSrcArr={restaurant.imageSrcArr}
                         name={restaurant.name}
                         mark={restaurant.mark}
