@@ -1,0 +1,106 @@
+@font-face {
+   font-family: "Yu Gothic UI";
+   src: url("/src/fonts/SF_Pro_Text/SFProText-Regular.ttf") format("ttf");
+}
+
+@font-face {
+   font-family: "SF Pro Text";
+   src: url("/src/fonts/SF_Pro_Text/SFProText-Regular.ttf") format("ttf");
+}
+
+@font-face {
+   font-family: "Poppins";
+   src: url("/src/fonts/Poppins/Poppins-Regular.ttf") format("ttf");
+}
+
+:root {
+   --main-color: #010f07;
+   --active-color---1: #eea734;
+   --body-text: #868686;
+   --input-color: #fbfbfb;
+   --bg-color: #fff;
+   --accent-color: #f8b64c;
+   --green: #22a45d;
+   --red: #ff7058;
+   --yellow: #ffd15c;
+}
+
+:root {
+   --ff-family: "Yu Gothic UI", sans-serif;
+   --sf-family: "SF Pro Text", sans-serif;
+   --tf-family: "Poppins", sans-serif;
+}
+
+/*reset css*/
+* {
+   margin: 0;
+   padding: 0;
+}
+
+/*reset css////////*/
+
+body {
+   font-family: var(--ff-family);
+}
+html {
+   background: #333;
+   block-size: 100%;
+   overflow: hidden;
+}
+
+body {
+   margin-block: 0;
+   margin-inline: auto;
+   max-inline-size: 100vh;
+   max-inline-size: 100lvb;
+   background: #fff;
+   block-size: 100%;
+   overflow: hidden;
+}
+
+body > * {
+   block-size: 100%;
+   overflow: auto;
+}
+
+input,
+select,
+button {
+   border: 0;
+   outline: 0;
+}
+
+a {
+   text-decoration: none;
+}
+
+input,
+button,
+fieldset {
+   border: 0;
+   outline: 0;
+}
+
+button {
+   cursor: pointer;
+}
+
+ul,
+menu {
+   list-style-type: none;
+}
+
+input[type="text"],
+input[type="search"] {
+   cursor: auto;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+   cursor: pointer;
+}
+
+.invisible {
+   position: fixed;
+   left: 100%;
+}
