@@ -1,131 +1,51 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import styles from "./index.module.css";
 import Card_medium from "~/components/Card_medium/card_medium";
 import Card_big from "~/components/Card_big/card_big";
 import Menu from "~/components/Menu/menu";
 
+interface AllRest {
+   imageSrcArr: string[];
+   name: string;
+   kitchensArr: string[];
+   mark: number;
+   price_range: number;
+   ratingsNum: number;
+   waiting_time: number;
+   order_type: string;
+}
+interface Card_medium {
+   imageSrc: string;
+   name: string;
+   place: string;
+   mark: number;
+   waiting_time: number;
+   order_type: string;
+}
+
+export const useAllRest = routeLoader$(async () => {
+   const res = await fetch("http://localhost:5173/api/allrest/");
+   const rest = await res.json();
+   return rest as AllRest[];
+});
+export const useTeamRest = routeLoader$(async () => {
+   const res = await fetch("http://localhost:5173/api/teamrest/");
+   console.log(res);
+   const rest = await res.json();
+   return rest as Card_medium[];
+});
+export const usePartnersRest = routeLoader$(async () => {
+   const res = await fetch("http://localhost:5173/api/partners/");
+   console.log(res);
+   const rest = await res.json();
+   return rest as Card_medium[];
+});
+
 export default component$(() => {
-   const dataPartners = [
-      {
-         imageSrc: "/fp1.png",
-         name: "Krispy Creme",
-         place: "St Georgece Terrace, Perth",
-         mark: 4.5,
-         waiting_time: 25,
-         order_type: "Free delivery",
-      },
-      {
-         imageSrc: "/fp2.png",
-         name: "Mario Italiano",
-         place: "Hay street , Perth City",
-         mark: 4.6,
-         waiting_time: 26,
-         order_type: "Free delivery",
-      },
-      {
-         imageSrc: "/fp1.png",
-         name: "Krispy Creme",
-         place: "St Georgece Terrace, Perth",
-         mark: 4.5,
-         waiting_time: 25,
-         order_type: "Free delivery",
-      },
-   ];
-   const dataTeamRestaurants = [
-      {
-         imageSrc: "/brt1.png",
-         name: "McDonald’s",
-         place: "Hay street , Perth City",
-         mark: 4.7,
-         waiting_time: 20,
-         order_type: "Free delivery",
-      },
-      {
-         imageSrc: "/brt2.png",
-         name: "The Halal Guys",
-         place: "Hay street , Perth City",
-         mark: 4.3,
-         waiting_time: 23,
-         order_type: "Free delivery",
-      },
-      {
-         imageSrc: "/brt1.png",
-         name: "McDonald’s",
-         place: "Hay street , Perth City",
-         mark: 4.7,
-         waiting_time: 20,
-         order_type: "Free delivery",
-      },
-      {
-         imageSrc: "/brt2.png",
-         name: "The Halal Guys",
-         place: "Hay street , Perth City",
-         mark: 4.3,
-         waiting_time: 23,
-         order_type: "Free delivery",
-      },
-   ];
-   const dataAllRestaurants = [
-      {
-         imageSrcArr: [
-            "/allr1.png",
-            "/allr2.png",
-            "/allr3.png",
-            "/allr1.png",
-            "/allr2.png",
-         ],
-         name: "McDonald’s",
-         place: "Hay street , Perth City",
-         price_range: 2,
-         kitchensArr: [
-            "Chinese",
-            "American",
-            "Deshi food",
-            "Chinese",
-            "American",
-            "Deshi food",
-         ],
-         mark: 4.3,
-         ratingsNum: 256,
-         waiting_time: 25,
-         order_type: "Free",
-      },
-      {
-         imageSrcArr: [
-            "/allr2.png",
-            "/allr1.png",
-            "/allr3.png",
-            "/allr1.png",
-            "/allr2.png",
-         ],
-         price_range: 3,
-         name: "McDonald’s",
-         place: "Hay street , Perth City",
-         kitchensArr: ["Chinese", "American", "Deshi food", "Chinese"],
-         mark: 4.3,
-         ratingsNum: 356,
-         waiting_time: 25,
-         order_type: "Free",
-      },
-      {
-         imageSrcArr: [
-            "/allr3.png",
-            "/allr2.png",
-            "/allr3.png",
-            "/allr1.png",
-            "/allr2.png",
-         ],
-         price_range: 1,
-         name: "McDonald’s",
-         place: "Hay street , Perth City",
-         kitchensArr: ["Chinese", "American", "Deshi food"],
-         mark: 4.3,
-         ratingsNum: 1256,
-         waiting_time: 25,
-         order_type: "Free",
-      },
-   ];
+   const signalAllRest = useAllRest();
+   const signalTeamRest = useTeamRest();
+   const signalPartnersRest = usePartnersRest();
 
    const generateKey = () =>
       `key-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -150,17 +70,10 @@ export default component$(() => {
                </div>
                <section class={[styles.media_scroller, styles.snaps_inline]}>
                   <h3 class="invisible">Карточки товара для партнеров</h3>
-                  {dataPartners.map((partner) => (
-                     <Card_medium
-                        key={generateKey()}
-                        imageSrc={partner.imageSrc}
-                        name={partner.name}
-                        place={partner.place}
-                        mark={partner.mark}
-                        waiting_time={partner.waiting_time}
-                        order_type={partner.order_type}
-                     />
-                  ))}
+                  <Card_medium
+                     key={generateKey()}
+                     data={signalTeamRest.value}
+                  />
                </section>
             </section>
             <section class={styles.banner}>
@@ -183,17 +96,10 @@ export default component$(() => {
                   <h3 class="invisible">
                      Карточки товара для командных ресторанов
                   </h3>
-                  {dataTeamRestaurants.map((partner) => (
-                     <Card_medium
-                        key={generateKey()}
-                        imageSrc={partner.imageSrc}
-                        name={partner.name}
-                        place={partner.place}
-                        mark={partner.mark}
-                        waiting_time={partner.waiting_time}
-                        order_type={partner.order_type}
-                     />
-                  ))}
+                  <Card_medium
+                     key={generateKey()}
+                     data={signalPartnersRest.value}
+                  />
                </section>
             </section>
             <section class={styles.columns}>
@@ -207,19 +113,7 @@ export default component$(() => {
                   <h3 class="invisible">
                      Карточки товара для для всех ресторанов
                   </h3>
-                  {dataAllRestaurants.map((restaurant) => (
-                     <Card_big
-                        key={generateKey()}
-                        imageSrcArr={restaurant.imageSrcArr}
-                        name={restaurant.name}
-                        mark={restaurant.mark}
-                        kitchen_list={restaurant.kitchensArr}
-                        ratingsNum={restaurant.ratingsNum}
-                        waiting_time={restaurant.waiting_time}
-                        order_type={restaurant.order_type}
-                        price_range={restaurant.price_range}
-                     />
-                  ))}
+                  <Card_big key={generateKey()} data={signalAllRest.value} />
                </section>
             </section>
             <Menu />

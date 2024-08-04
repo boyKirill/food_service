@@ -1,6 +1,12 @@
 .card_container {
    display: grid;
    grid-template-columns: 200px;
+   position: relative;
+}
+.card_link {
+   position: absolute;
+   inset: 0;
+   z-index: 5;
 }
 .institution_img_box img {
    inline-size: 100%;
@@ -21,6 +27,7 @@
    line-height: 1.5;
    letter-spacing: -0.03em;
    color: var(--body-text);
+   font-style: normal;
 }
 .institution_info {
    display: flex;

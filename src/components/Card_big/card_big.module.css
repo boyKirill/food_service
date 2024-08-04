@@ -10,11 +10,13 @@
    object-fit: cover;
 }
 .institution_name {
+   padding-top: 8px;
+}
+.institution_name a {
    font-weight: 300;
    font-size: 20px;
    letter-spacing: 0.02em;
    color: var(--main-color);
-   padding-top: 8px;
 }
 .institution_place {
    font-weight: 400;

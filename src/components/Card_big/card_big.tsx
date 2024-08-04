@@ -1,16 +1,21 @@
 import { component$ } from "@builder.io/qwik";
 import styles from "./card_big.module.css";
 import Carousel from "../Carousel/carousel";
+import { Link } from "@builder.io/qwik-city";
 
-interface ItemProps {
+interface AllRest {
    imageSrcArr: string[];
    name: string;
-   kitchen_list: string[];
+   kitchensArr: string[];
    mark: number;
    price_range: number;
    ratingsNum: number;
    waiting_time: number;
    order_type: string;
+}
+
+interface ItemProps {
+   data: AllRest[];
 }
 
 export default component$<ItemProps>((props) => {
@@ -26,44 +31,48 @@ export default component$<ItemProps>((props) => {
 
    return (
       <>
-         <article class={styles.card_container}>
-            <div class={styles.institution_img_box}>
-               <Carousel contentOfSlides={props.imageSrcArr} />
-            </div>
-            <h3 class={styles.institution_name}>{props.name}</h3>
-            <header class={styles.institution_place}>
-               <span class={styles.price_range}>
-                  {getPriceRange(props.price_range)}
-               </span>
-               <ul class={styles.kitchen_list}>
-                  {props.kitchen_list.map((kitchen_name) => (
-                     <li key={generateKey()}>{kitchen_name}</li>
-                  ))}
-               </ul>
-            </header>
-            <header class={styles.institution_info}>
-               <section>
-                  <h4 class="invisible">Оценка заведения</h4>
-                  <div class={styles.mark}>{props.mark}</div>
-               </section>
-               <section>
-                  <h4 class="invisible">Количесвто оценок заведения</h4>
-                  <div class={styles.ratingsNum}>
-                     {Math.round(props.ratingsNum / 100) * 100 + "+ Ratings"}
-                  </div>
-               </section>
-               <section>
-                  <h4 class="invisible">Время ожидания доставки</h4>
-                  <div class={styles.waiting_time}>
-                     {props.waiting_time + " " + "Min"}
-                  </div>
-               </section>
-               <section>
-                  <h4 class="invisible">Цена доставки</h4>
-                  <div class={styles.order_type}>{props.order_type}</div>
-               </section>
-            </header>
-         </article>
+         {props.data.map((item) => (
+            <article class={styles.card_container}>
+               <div class={styles.institution_img_box}>
+                  <Carousel contentOfSlides={item.imageSrcArr} />
+               </div>
+               <h3 class={styles.institution_name}>
+                  <Link href="/">{item.name}</Link>
+               </h3>
+               <header class={styles.institution_place}>
+                  <span class={styles.price_range}>
+                     {getPriceRange(item.price_range)}
+                  </span>
+                  <ul class={styles.kitchen_list}>
+                     {item.kitchensArr.map((kitchen_name) => (
+                        <li key={generateKey()}>{kitchen_name}</li>
+                     ))}
+                  </ul>
+               </header>
+               <header class={styles.institution_info}>
+                  <section>
+                     <h4 class="invisible">Оценка заведения</h4>
+                     <div class={styles.mark}>{item.mark}</div>
+                  </section>
+                  <section>
+                     <h4 class="invisible">Количесвто оценок заведения</h4>
+                     <div class={styles.ratingsNum}>
+                        {Math.round(item.ratingsNum / 100) * 100 + "+ Ratings"}
+                     </div>
+                  </section>
+                  <section>
+                     <h4 class="invisible">Время ожидания доставки</h4>
+                     <div class={styles.waiting_time}>
+                        {item.waiting_time + " " + "Min"}
+                     </div>
+                  </section>
+                  <section>
+                     <h4 class="invisible">Цена доставки</h4>
+                     <div class={styles.order_type}>{item.order_type}</div>
+                  </section>
+               </header>
+            </article>
+         ))}
       </>
    );
 });
