@@ -31,13 +31,11 @@ export const useAllRest = routeLoader$(async () => {
 });
 export const useTeamRest = routeLoader$(async () => {
    const res = await fetch("http://localhost:5173/api/teamrest/");
-   console.log(res);
    const rest = await res.json();
    return rest as Card_medium[];
 });
 export const usePartnersRest = routeLoader$(async () => {
    const res = await fetch("http://localhost:5173/api/partners/");
-   console.log(res);
    const rest = await res.json();
    return rest as Card_medium[];
 });

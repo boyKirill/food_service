@@ -1,14 +1,14 @@
 .card_container {
    display: grid;
-   grid-template-columns: minmax(100px, 140px);
+   grid-template-columns: minmax(100px, 160px);
+   max-width: 160px;
    position: relative;
    border-radius: 8px;
-   background-color: #868686;
    justify-content: center;
 }
 .image_box img {
    inline-size: 100%;
-   aspect-ratio: 1;
+   aspect-ratio: 6/5;
 }
 .dish_name {
    font-weight: 300;
@@ -30,20 +30,28 @@
 }
 
 .price_range,
-.kitchen {
+.kitchen li {
    font-weight: 400;
    font-size: 14px;
    line-height: 1.43;
    letter-spacing: -0.02em;
    color: var(--main-color);
    opacity: 0.64;
+   white-space: nowrap;
 }
 .kitchen {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   gap: 6px;
+}
+
+.kitchen li {
    display: flex;
    align-items: center;
    gap: 6px;
 }
-.kitchen::before {
+.kitchen li::before {
    content: "";
    display: inline-block;
    width: 4px;

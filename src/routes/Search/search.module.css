@@ -1,0 +1,115 @@
+/*pagination*/
+.pagination {
+   display: flex;
+   gap: 10px;
+   align-items: center;
+   justify-content: center;
+   padding-block: 20px;
+}
+.page_num {
+   color: var(--main-color);
+   font-weight: 500;
+}
+.pag_prev,
+.pag_next {
+   padding: 10px;
+   position: relative;
+   line-height: 1;
+}
+.pag_prev span,
+.pag_next span {
+   display: block;
+   width: 24px;
+   height: 2px;
+   background-color: #007bff;
+   border-radius: 10px;
+}
+
+.pag_next::after,
+.pag_next::before,
+.pag_prev::after,
+.pag_prev::before {
+   border-radius: 10px;
+   content: "";
+   width: 12px;
+   height: 2px;
+   display: block;
+   position: absolute;
+   right: 0;
+   background-color: #007bff;
+}
+.pag_next::before,
+.pag_prev::before {
+   top: 0;
+   transform: rotate(45deg) translate(-1px, 10px);
+}
+.pag_next::after,
+.pag_prev::after {
+   bottom: 0;
+   transform: rotate(135deg) translate(1px, 10px);
+}
+.pag_prev {
+   transform: rotate(180deg);
+}
+a.disabled_link {
+   pointer-events: none; /* делаем элемент неактивным для взаимодействия */
+   cursor: default;
+   span,
+   &:before,
+   &:after {
+      /*  курсор в виде стрелки */
+      background-color: #ccc; /* цвет текста серый */
+   }
+}
+
+/*pagination---*/
+
+.search_form {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   padding: 24px 20px 0 20px;
+   /* position: sticky;
+   left: 0;
+   top: 0;
+   background-color: #fff;
+   z-index: 5; */
+}
+.search_form h1 {
+   font-weight: 600;
+   font-size: 28px;
+   line-height: 1.3;
+   letter-spacing: 0.01em;
+   color: var(--main-color);
+}
+.search_form label {
+   max-width: 600px;
+}
+.search_form input[type="search"] {
+   width: 100%;
+   padding: 12px 20px 12px 52px;
+   border: 1px solid rgba(134, 134, 134, 0.1);
+   border-radius: 8px;
+   background: var(--input-color) url("/search.svg") 10px 50% no-repeat;
+}
+
+.found_products_container h2 {
+   font-size: 16px;
+   line-height: 1.5;
+   letter-spacing: -0.03em;
+   color: #000;
+}
+
+.found_products_container {
+   padding: 34px 24px 0 24px;
+}
+
+.found_products {
+   padding-block: 20px;
+   display: grid;
+   gap: 15px;
+   grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+}
+.found_products > * {
+   align-self: start;
+}
