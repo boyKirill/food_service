@@ -1,0 +1,36 @@
+.card_container {
+  display: flex;
+  align-items: center;
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 10px;
+}
+
+.card_container:before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.category_link {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+.category_name {
+  position: relative;
+  z-index: 2;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--bg-color);
+}

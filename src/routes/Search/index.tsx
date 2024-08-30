@@ -1,187 +1,181 @@
 import {
-   $,
-   component$,
-   useComputed$,
-   useSignal,
-   useStore,
-   useTask$,
-   useVisibleTask$,
+  $,
+  component$,
+  useComputed$,
+  useSignal,
+  useStore,
+  useTask$,
+  useVisibleTask$,
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { routeLoader$, useLocation, useNavigate } from "@builder.io/qwik-city";
+import { routeLoader$, useNavigate } from "@builder.io/qwik-city";
 import styles from "./search.module.css";
 import Menu from "~/components/Menu/menu";
-import Card_small from "~/components/Card_small/card_small";
+import Pagination from "~/components/Pagination/pagination";
+import CardSmall from "~/components/CardSmall/cardSmall";
 import type { Data } from "~/routes/api/searchrest";
 
 export const useData = routeLoader$(async () => {
-   try {
-      const res = await fetch("http://localhost:5173/api/searchrest/");
-      const rest = await res.json();
-
-      return rest as Data[];
-   } catch (e) {
-      return null;
-   }
+  try {
+    const res = await fetch("http://localhost:5173/api/searchrest/");
+    const rest = await res.json();
+    const { dataCard } = rest;
+    dataCard.map(
+      (item: Data) =>
+        (item.key = `key-${Math.random().toString(36).substr(2, 9)}`),
+    );
+    return rest;
+  } catch (e) {
+    return null;
+  }
 });
 
+interface pagObject {
+  prev: number | null;
+  current: number;
+  next: number | null;
+}
+
 export default component$(() => {
-   const { dataCard, pageSize, total, page } = useData().value;
-   const ORIGINAL_DATA = dataCard;
-   const search = useSignal("");
-   const navPage = useSignal(page ? page : "1");
-   const pageCount = useSignal(
-      total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize)
-   );
+  const { dataCard, pageSize, total, page } = useData().value;
+  const ORIGINAL_DATA = dataCard;
+  const sortedData = useSignal([]);
+  const search = useSignal("");
 
-   const location = useLocation();
-   const urlPag = location.url;
+  const pageCount = useSignal(
+    total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize),
+  );
 
-   if (ORIGINAL_DATA.value === null) {
-      return <>Error</>;
-   }
+  const pagObject: pagObject = useStore({
+    prev: null,
+    current: page,
+    next: null,
+  });
 
-   const setLinks = useComputed$(() => {
-      if (navPage.value == 1) {
-         return {
-            next: pageCount.value == 1 ? null : navPage.value + 1,
-            prev: null,
-         };
-      } else if (navPage.value == pageCount.value) {
-         console.log(" pageCount.value");
-         console.log(pageCount.value);
-         return {
-            next: null,
-            prev: navPage.value - 1,
-         };
-      } else {
-         return {
-            next: navPage.value + 1,
-            prev: navPage.value - 1,
-         };
-      }
-   });
+  const navigate = useNavigate();
 
-   useVisibleTask$(() => {
-      const pageNum = urlPag.searchParams.get("page");
+  if (ORIGINAL_DATA.value === null) {
+    return <>Error</>;
+  }
 
-      if (!pageNum) {
-         urlPag.searchParams.set("pageSize", pageSize);
-         urlPag.searchParams.set("page", navPage.value);
-         window.history.pushState({}, "", urlPag);
-         return;
-      }
-      navPage.value = Number(pageNum);
+  useTask$(({ track }) => {
+    track(() => pagObject.current);
+    track(() => pageCount.value);
 
-      const urlParams = new URLSearchParams(window.location.search);
+    if (pagObject.current == 1 && pageCount.value == 1) {
+      pagObject.next = null;
+      pagObject.prev = null;
+    } else if (pagObject.current == 1) {
+      pagObject.next = pagObject.current + 1;
+      pagObject.prev = null;
+    } else if (pagObject.current == pageCount.value) {
+      pagObject.next = null;
+      pagObject.prev = pagObject.current - 1;
+    } else {
+      pagObject.next = pagObject.current + 1;
+      pagObject.prev = pagObject.current - 1;
+    }
+  });
 
-      const searchInputParam = urlParams.get("searchInputParam");
-      if (searchInputParam) {
-         search.value = searchInputParam;
-      }
-   });
+  useVisibleTask$(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageNum = urlParams.get("page");
 
-   const list = useComputed$(() => {
-      const searchParam = search.value.toLocaleLowerCase().trim();
+    if (!pageNum) {
+      urlParams.set("pageSize", pageSize);
+      urlParams.set("page", page.toString());
+      navigate(`?${urlParams.toString()}`);
+      return;
+    }
+    pagObject.current = Number(pageNum);
 
-      if (searchParam.length > 0) {
-         const filteredArr = ORIGINAL_DATA.filter((e) =>
-            e.name.toLocaleLowerCase().includes(searchParam)
-         );
+    const searchInputParam = urlParams.get("searchInputParam");
+    if (searchInputParam) {
+      search.value = searchInputParam;
+    }
+  });
 
-         filteredArr.length <= pageSize
-            ? (pageCount.value = 1)
-            : (pageCount.value =
-                 filteredArr.length % pageSize == 0
-                    ? filteredArr.length / pageSize
-                    : Math.ceil(filteredArr.length / pageSize));
+  useTask$(({ track }) => {
+    track(() => search.value);
+    const searchParam = search.value.toLocaleLowerCase().trim();
+    console.log(searchParam);
 
-         return filteredArr;
-      }
-
-      pageCount.value =
-         total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize);
-
-      return ORIGINAL_DATA; // no filtering, return original list
-   });
-   const cardArr = useComputed$(() => {
-      const end = pageSize * navPage.value;
-      const start = end - pageSize;
-      return list.value.slice(start, end);
-   });
-
-   const handleChange = $((event) => {
-      navPage.value = 1;
-
-      search.value = event.target.value;
-      console.log(search.value);
-
-      const url = new URL(window.location);
-
-      url.searchParams.set("page", navPage.value);
-      url.searchParams.set("searchInputParam", search.value);
-      window.history.pushState({}, "", url);
-   });
-
-   const getNuvLinks = () => {
-      return (
-         <div class={styles.pagination}>
-            <a
-               class={[
-                  styles.pag_prev,
-                  setLinks.value.prev ? null : styles.disabled_link,
-               ]}
-               href={`?pageSize=${pageSize}&page=${setLinks.value.prev ? setLinks.value.prev : "#"}&searchInputParam=${search.value}`}>
-               <span></span>
-            </a>
-            <span class={styles.page_num}>{navPage.value}</span>
-            <a
-               class={[
-                  styles.pag_next,
-                  setLinks.value.next ? null : styles.disabled_link,
-               ]}
-               href={`?pageSize=${pageSize}&page=${setLinks.value.next ? setLinks.value.next : "#"}&searchInputParam=${search.value}`}>
-               <span></span>
-            </a>
-         </div>
+    if (searchParam.length > 0) {
+      sortedData.value = ORIGINAL_DATA.filter((e: Data) =>
+        e.name.toLocaleLowerCase().includes(searchParam),
       );
-   };
 
-   const generateKey = () =>
-      `key-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const totalSortArr = sortedData.value.length;
 
-   return (
-      <div>
-         <form action="/Search" class={styles.search_form}>
-            <h1>Search</h1>
-            <label>
-               <span class="invisible">search input of products</span>
-               <input
-                  type="search"
-                  placeholder="Search on foodly"
-                  bind:value={search}
-                  onInput$={handleChange}
-               />
-            </label>
-         </form>
-         <section class={styles.found_products_container}>
-            <h2>Top Restaurants</h2>
-            <div class={styles.found_products}>
-               <Card_small key={generateKey()} data={cardArr.value} />
-            </div>
-         </section>
-         {getNuvLinks()}
-         <Menu />
-      </div>
-   );
+      if (totalSortArr <= pageSize) {
+        pageCount.value = 1;
+      } else {
+        pageCount.value =
+          totalSortArr % pageSize == 0
+            ? totalSortArr / pageSize
+            : Math.ceil(totalSortArr / pageSize);
+      }
+      return;
+    }
+
+    pageCount.value =
+      total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize);
+    console.log(pageCount.value);
+
+    sortedData.value = ORIGINAL_DATA; // no filtering, return original list
+  });
+  const cardArr = useComputed$(() => {
+    const end = pageSize * pagObject.current;
+    const start = end - pageSize;
+    return sortedData.value.slice(start, end);
+  });
+
+  const handleChange = $((event: InputEvent) => {
+    pagObject.current = 1;
+
+    const input = event.target as HTMLInputElement;
+    search.value = input.value;
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    urlParams.set("page", pagObject.current.toString());
+    urlParams.set("searchInputParam", search.value);
+    navigate(`?${urlParams.toString()}`);
+  });
+
+  return (
+     <div class={styles.wrapper}>
+        <form action="/Search" class={styles.search_form}>
+           <h1>Search</h1>
+           <label>
+              <span class="invisible">search input of products</span>
+              <input
+                 type="search"
+                 placeholder="Search on foodly"
+                 bind:value={search}
+                 onInput$={handleChange}
+              />
+           </label>
+        </form>
+        <section class={styles.found_products_container}>
+           <h2>Top Restaurants</h2>
+           <div class={styles.found_products}>
+              <CardSmall data={cardArr.value} />
+           </div>
+        </section>
+
+        <Pagination pagObject={pagObject}></Pagination>
+        <Menu />
+     </div>
+  );
 });
 
 export const head: DocumentHead = {
-   title: "Search",
-   meta: [
-      {
-         name: "description",
-         content: "Qwik site description",
-      },
-   ],
+  title: "Search",
+  meta: [
+    {
+      name: "description",
+      content: "Qwik site description",
+    },
+  ],
 };

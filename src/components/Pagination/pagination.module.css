@@ -1,0 +1,66 @@
+/*pagination*/
+.pagination {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding-block: 20px;
+}
+.page_num {
+  color: var(--main-color);
+  font-weight: 500;
+}
+.pag_prev,
+.pag_next {
+  padding: 10px;
+  position: relative;
+  line-height: 1;
+  background-color: transparent;
+}
+.pag_prev span,
+.pag_next span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #007bff;
+  border-radius: 10px;
+}
+
+.pag_next::after,
+.pag_next::before,
+.pag_prev::after,
+.pag_prev::before {
+  border-radius: 10px;
+  content: "";
+  width: 12px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  right: 0;
+  background-color: #007bff;
+}
+.pag_next::before,
+.pag_prev::before {
+  top: 0;
+  transform: rotate(45deg) translate(-1px, 10px);
+}
+.pag_next::after,
+.pag_prev::after {
+  bottom: 0;
+  transform: rotate(135deg) translate(1px, 10px);
+}
+.pag_prev {
+  transform: rotate(180deg);
+}
+button:disabled {
+  pointer-events: none; /* делаем элемент неактивным для взаимодействия */
+
+  cursor: default;
+  span,
+  &:before,
+  &:after {
+    /*  курсор в виде стрелки */
+    background-color: #ccc; /* цвет текста серый */
+  }
+}
+/*pagination---*/
