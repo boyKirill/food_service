@@ -10,7 +10,10 @@ import type { dataCardMedium } from "./api/partners";
 
 export const useAllRest = routeLoader$(async () => {
    try {
-      const res = await fetch("http://localhost:5173/api/allrest/");
+      // const res = await fetch("http://localhost:5173/api/allrest/"); //Локальныая
+      const res = await fetch(
+         "https://main--famous-haupia-a6154c.netlify.app/api/allrest/"
+      ); //Сервер
       if (!res.ok) {
          throw new Error(
             `Failed to fetch data: ${res.status} ${res.statusText}`
@@ -30,7 +33,10 @@ export const useAllRest = routeLoader$(async () => {
 
 export const useTeamRest = routeLoader$(async () => {
    try {
-      const res = await fetch("http://localhost:5173/api/teamrest/");
+      // const res = await fetch("http://localhost:5173/api/teamrest/");
+      const res = await fetch(
+         "https://main--famous-haupia-a6154c.netlify.app/api/teamrest/"
+      );
       if (!res.ok) {
          throw new Error(
             `Failed to fetch data: ${res.status} ${res.statusText}`
@@ -50,7 +56,10 @@ export const useTeamRest = routeLoader$(async () => {
 
 export const usePartnersRest = routeLoader$(async () => {
    try {
-      const res = await fetch("http://localhost:5173/api/partners/");
+      // const res = await fetch("http://localhost:5173/api/partners/");
+      const res = await fetch(
+         "https://main--famous-haupia-a6154c.netlify.app/api/partners/"
+      );
       if (!res.ok) {
          throw new Error(
             `Failed to fetch data: ${res.status} ${res.statusText}`
