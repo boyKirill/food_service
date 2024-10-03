@@ -1,130 +1,135 @@
 .card_container {
-  display: grid;
-  grid-template-columns: minmax(280px, 335px);
-  justify-content: center;
+   display: grid;
+   grid-template-columns: minmax(280px, 335px);
+   justify-content: center;
+   position: relative;
+}
+.product_link {
+   position: absolute;
+   content: "";
+   inset: 0;
 }
 .institution_img_box img {
-  inline-size: 100%;
-  aspect-ratio: 4/3;
-  border-radius: 10px;
-  object-fit: cover;
+   inline-size: 100%;
+   aspect-ratio: 4/3;
+   border-radius: 10px;
+   object-fit: cover;
 }
 .institution_name {
-  padding-top: 8px;
-}
-.institution_name a {
-  font-weight: 300;
-  font-size: 20px;
-  letter-spacing: 0.02em;
-  color: var(--main-color);
+   padding-top: 8px;
+   font-weight: 300;
+   font-size: 20px;
+   letter-spacing: 0.02em;
+   color: var(--main-color);
 }
 .institution_place {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: -0.03em;
-  color: var(--body-text);
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 1.5;
+   letter-spacing: -0.03em;
+   color: var(--body-text);
 }
 .institution_info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 13px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding-top: 13px;
+   pointer-events: none;
 }
 .institution_info section {
-  display: flex;
+   display: flex;
 }
 .mark,
 .ratingsNum,
 .waiting_time,
 .order_type {
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 1.67;
-  letter-spacing: -0.02em;
-  text-align: center;
-  color: var(--main-color);
-  opacity: 0.74;
-  white-space: nowrap;
+   font-weight: 300;
+   font-size: 12px;
+   line-height: 1.67;
+   letter-spacing: -0.02em;
+   text-align: center;
+   color: var(--main-color);
+   opacity: 0.74;
+   white-space: nowrap;
 }
 .mark {
-  display: flex;
-  gap: 3px;
-  align-items: center;
+   display: flex;
+   gap: 3px;
+   align-items: center;
 }
 .mark::after {
-  content: "";
-  display: block;
-  width: 12px;
-  height: 12px;
-  background: url("/public/Star.svg") no-repeat;
+   content: "";
+   display: block;
+   width: 12px;
+   height: 12px;
+   background: url("/public/Star.svg") no-repeat;
 }
 
 .waiting_time {
-  display: flex;
-  gap: 5px;
-  align-items: center;
+   display: flex;
+   gap: 5px;
+   align-items: center;
 }
 .waiting_time::before {
-  content: "";
-  display: block;
-  width: 14px;
-  height: 14px;
-  background: url("/public/timer.svg") no-repeat;
+   content: "";
+   display: block;
+   width: 14px;
+   height: 14px;
+   background: url("/public/timer.svg") no-repeat;
 }
 
 .order_type {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+   display: flex;
+   align-items: center;
+   gap: 8px;
 }
 .order_type::after {
-  order: -1;
-  content: "";
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: #868686;
+   order: -1;
+   content: "";
+   display: inline-block;
+   width: 4px;
+   height: 4px;
+   border-radius: 50%;
+   background-color: #868686;
 }
 .order_type::before {
-  content: "";
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: #868686;
-  background: url("/public/Dollar.svg") no-repeat;
+   content: "";
+   display: inline-block;
+   width: 18px;
+   height: 18px;
+   border-radius: 50%;
+   background-color: #868686;
+   background: url("/public/Dollar.svg") no-repeat;
 }
 .institution_place {
-  display: flex;
-  gap: 12px;
+   display: flex;
+   gap: 12px;
 }
 .kitchen_list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
-  align-items: center;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 13px;
+   align-items: center;
 }
 
 .kitchen_list li,
 .price_range {
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: -0.03em;
-  color: var(--body-text);
-  white-space: nowrap;
+   font-size: 16px;
+   line-height: 1.5;
+   letter-spacing: -0.03em;
+   color: var(--body-text);
+   white-space: nowrap;
 }
 .kitchen_list li {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+   display: flex;
+   align-items: center;
+   gap: 5px;
 }
 .kitchen_list li::before {
-  content: "";
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: #868686;
+   content: "";
+   display: inline-block;
+   width: 4px;
+   height: 4px;
+   border-radius: 50%;
+   background-color: #868686;
 }

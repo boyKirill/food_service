@@ -3,17 +3,16 @@ import {
    component$,
    useComputed$,
    useSignal,
-   useStore,
    useTask$,
    useVisibleTask$,
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { routeLoader$, useNavigate } from "@builder.io/qwik-city";
+import { routeLoader$, useLocation, useNavigate } from "@builder.io/qwik-city";
 import styles from "./search.module.css";
-import Menu from "~/components/Menu/menu";
-import Pagination from "~/components/Pagination/pagination";
-import CardSmall from "~/components/CardSmall/cardSmall";
 import type { Data } from "~/routes/api/searchrest";
+import Menu from "~/components/Menu/menu";
+import CardSmall from "~/components/CardSmall/cardSmall";
+import Pagination from "~/components/Pagination/pagination";
 
 export const useData = routeLoader$(async () => {
    try {
@@ -21,6 +20,7 @@ export const useData = routeLoader$(async () => {
       const res = await fetch(
          "https://main--famous-haupia-a6154c.netlify.app/api/searchrest/"
       ); //Деплой
+
       if (!res.ok) {
          throw new Error(
             `Failed to fetch data: ${res.status} ${res.statusText}`
@@ -39,27 +39,23 @@ export const useData = routeLoader$(async () => {
    }
 });
 
-interface pagObject {
-   prev: number | null;
-   current: number;
-   next: number | null;
-}
+const getPageCount = (total: number, size: number) => {
+   return total % size == 0 ? total / size : Math.ceil(total / size);
+};
 
 export default component$(() => {
-   const { dataCard, pageSize, total, page } = useData().value;
+   const { dataCard } = useData().value;
+   let { pageSize, total } = useData().value;
+   const { page } = useData().value;
    const ORIGINAL_DATA = dataCard;
    const sortedData = useSignal([]);
-   const search = useSignal("");
+   const search = useSignal<string>("");
 
-   const pageCount = useSignal(
-      total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize)
-   );
+   const location = useLocation();
+   const urlParams = location.url.searchParams;
 
-   const pagObject: pagObject = useStore({
-      prev: null,
-      current: page,
-      next: null,
-   });
+   const pageCount = useSignal<number>();
+   const currentPage = useSignal<number>(1);
 
    const navigate = useNavigate();
 
@@ -67,87 +63,85 @@ export default component$(() => {
       return <>Error</>;
    }
 
-   useTask$(({ track }) => {
-      track(() => pagObject.current);
-      track(() => pageCount.value);
+   pageSize = pageSize ? pageSize : 10;
+   total = total ? total : ORIGINAL_DATA.length;
 
-      if (pagObject.current == 1 && pageCount.value == 1) {
-         pagObject.next = null;
-         pagObject.prev = null;
-      } else if (pagObject.current == 1) {
-         pagObject.next = pagObject.current + 1;
-         pagObject.prev = null;
-      } else if (pagObject.current == pageCount.value) {
-         pagObject.next = null;
-         pagObject.prev = pagObject.current - 1;
-      } else {
-         pagObject.next = pagObject.current + 1;
-         pagObject.prev = pagObject.current - 1;
+   useTask$(() => {
+      const current = urlParams.get("page");
+      if (!current) {
+         currentPage.value = page ? page : 1;
+         pageCount.value = getPageCount(total, pageSize);
+         urlParams.set("pageCount", pageCount.value.toString());
+         urlParams.set("pageSize", pageSize.toString());
+         urlParams.set("page", currentPage.value.toString());
       }
    });
 
+   useTask$(({ track }) => {
+      track(() => location.url.search);
+      const urlParams = new URLSearchParams(location.url.search);
+
+      const current = Number(urlParams.get("page"))
+         ? Number(urlParams.get("page"))
+         : 1;
+      currentPage.value = current;
+   });
+
+   // eslint-disable-next-line qwik/no-use-visible-task
    useVisibleTask$(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const pageNum = urlParams.get("page");
-
-      if (!pageNum) {
-         urlParams.set("pageSize", pageSize);
-         urlParams.set("page", page.toString());
-         navigate(`?${urlParams.toString()}`);
-         return;
-      }
-      pagObject.current = Number(pageNum);
-
       const searchInputParam = urlParams.get("searchInputParam");
       if (searchInputParam) {
          search.value = searchInputParam;
       }
+      navigate(`?${urlParams.toString()}`);
    });
 
    useTask$(({ track }) => {
       track(() => search.value);
+
       const searchParam = search.value.toLocaleLowerCase().trim();
 
       if (searchParam.length > 0) {
          sortedData.value = ORIGINAL_DATA.filter((e: Data) =>
             e.name.toLocaleLowerCase().includes(searchParam)
          );
-
-         const totalSortArr = sortedData.value.length;
-
-         if (totalSortArr <= pageSize) {
-            pageCount.value = 1;
-         } else {
-            pageCount.value =
-               totalSortArr % pageSize == 0
-                  ? totalSortArr / pageSize
-                  : Math.ceil(totalSortArr / pageSize);
-         }
          return;
       }
 
-      pageCount.value =
-         total % pageSize == 0 ? total / pageSize : Math.ceil(total / pageSize);
-
       sortedData.value = ORIGINAL_DATA; // no filtering, return original list
    });
+
+   useTask$(({ track }) => {
+      track(() => sortedData.value);
+
+      const total = sortedData.value.length;
+
+      pageCount.value = getPageCount(total, pageSize);
+
+      if (currentPage.value > pageCount.value) {
+         currentPage.value = pageCount.value;
+      }
+      if (currentPage.value < 1) {
+         currentPage.value = 1;
+      }
+      urlParams.set("pageCount", pageCount.value.toString());
+      urlParams.set("pageSize", pageSize.toString());
+      urlParams.set("page", currentPage.value.toString());
+
+      navigate(`?${urlParams.toString()}`);
+   });
    const cardArr = useComputed$(() => {
-      const end = pageSize * pagObject.current;
+      const end = pageSize * currentPage.value;
       const start = end - pageSize;
       return sortedData.value.slice(start, end);
    });
 
    const handleChange = $((event: InputEvent) => {
-      pagObject.current = 1;
-
       const input = event.target as HTMLInputElement;
       search.value = input.value;
-
-      const urlParams = new URLSearchParams(window.location.search);
-
-      urlParams.set("page", pagObject.current.toString());
+      currentPage.value = 1;
+      urlParams.set("page", currentPage.value.toString());
       urlParams.set("searchInputParam", search.value);
-      navigate(`?${urlParams.toString()}`);
    });
 
    return (
@@ -164,14 +158,24 @@ export default component$(() => {
                />
             </label>
          </form>
-         <section class={styles.found_products_container}>
-            <h2>Top Restaurants</h2>
-            <div class={styles.found_products}>
-               <CardSmall data={cardArr.value} />
+         {cardArr.value.length > 0 && (
+            <div class={[styles.container]}>
+               <section class={styles.found_products_container}>
+                  <h2>Top Restaurants</h2>
+                  <div class={styles.found_products}>
+                     <CardSmall data={cardArr.value} />
+                  </div>
+               </section>
+               <Pagination></Pagination>
             </div>
-         </section>
+         )}
 
-         <Pagination pagObject={pagObject}></Pagination>
+         {cardArr.value.length <= 0 && (
+            <div class={[styles.container, styles.nothing_found]}>
+               Ничего не найдено
+            </div>
+         )}
+
          <Menu />
       </div>
    );

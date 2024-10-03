@@ -93,55 +93,60 @@ export default component$(() => {
                </select>
                <button class={styles.filter_btn}>Filter</button>
             </form>
-            <section class={styles.slider}>
-               <div class={styles.section_header}>
-                  <h2 class={styles.section_name}>Featured Partners</h2>
-                  <a href="/" class={styles.see_all}>
-                     See all
-                  </a>
-               </div>
-               <section class={[styles.media_scroller, styles.snaps_inline]}>
-                  <h3 class="invisible">Карточки товара для партнеров</h3>
-                  <CardMedium data={signalTeamRest.value} />
+            <div class={styles.container}>
+               <section class={styles.slider}>
+                  <div class={styles.section_header}>
+                     <h2 class={styles.section_name}>Featured Partners</h2>
+                     <a href="/" class={styles.see_all}>
+                        See all
+                     </a>
+                  </div>
+                  <section class={[styles.media_scroller, styles.snaps_inline]}>
+                     <h3 class="invisible">Карточки товара для партнеров</h3>
+                     <CardMedium data={signalTeamRest.value} />
+                  </section>
                </section>
-            </section>
-            <section class={styles.banner}>
-               <h2 class={styles.banner_titile}>Free Delivery for 1 Month!</h2>
-               <p class={styles.banner_text}>
-                  You’ve to order at least $10 for using free delivery for 1
-                  month.
-               </p>
-            </section>
-            <section class={styles.slider}>
-               <div class={styles.section_header}>
-                  <h2 class={styles.section_name}>
-                     Best Picks Restaurants by team
+               <section class={styles.banner}>
+                  <h2 class={styles.banner_titile}>
+                     Free Delivery for 1 Month!
                   </h2>
-                  <a href="/" class={styles.see_all}>
-                     See all
-                  </a>
-               </div>
-               <section class={[styles.media_scroller, styles.snaps_inline]}>
-                  <h3 class="invisible">
-                     Карточки товара для командных ресторанов
-                  </h3>
-                  <CardMedium data={signalPartnersRest.value} />
+                  <p class={styles.banner_text}>
+                     You’ve to order at least $10 for using free delivery for 1
+                     month.
+                  </p>
                </section>
-            </section>
-            <section class={styles.columns}>
-               <div class={styles.section_header}>
-                  <h2 class={styles.section_name}>All Restaurants</h2>
-                  <a href="/" class={styles.see_all}>
-                     See all
-                  </a>
-               </div>
-               <section class={styles.big_cards}>
-                  <h3 class="invisible">
-                     Карточки товара для для всех ресторанов
-                  </h3>
-                  <CardBig data={signalAllRest.value} />
+               <section class={styles.slider}>
+                  <div class={styles.section_header}>
+                     <h2 class={styles.section_name}>
+                        Best Picks Restaurants by team
+                     </h2>
+                     <a href="/" class={styles.see_all}>
+                        See all
+                     </a>
+                  </div>
+                  <section class={[styles.media_scroller, styles.snaps_inline]}>
+                     <h3 class="invisible">
+                        Карточки товара для командных ресторанов
+                     </h3>
+                     <CardMedium data={signalPartnersRest.value} />
+                  </section>
                </section>
-            </section>
+               <section class={styles.columns}>
+                  <div class={styles.section_header}>
+                     <h2 class={styles.section_name}>All Restaurants</h2>
+                     <a href="/" class={styles.see_all}>
+                        See all
+                     </a>
+                  </div>
+                  <section class={styles.big_cards}>
+                     <h3 class="invisible">
+                        Карточки товара для для всех ресторанов
+                     </h3>
+                     <CardBig data={signalAllRest.value} />
+                  </section>
+               </section>
+            </div>
+
             <Menu />
          </main>
       </>
