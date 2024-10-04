@@ -44,7 +44,17 @@ export default component$(() => {
    const location = useLocation();
    const paginationFromURL = parseURL(location.url);
    const pagination = getPagination(paginationFromURL);
-   const urlParamsStr = location.url.search.toString();
+
+   const prevPageUrl = new URL(location.url.href);
+   const nextPageUrl = new URL(location.url.href);
+   if ("current" in pagination) {
+      prevPageUrl.searchParams.set("page", (pagination.current - 1).toString());
+      nextPageUrl.searchParams.set("page", (pagination.current + 1).toString());
+   } else {
+      // обработка случая, если 'current' отсутствует
+      console.log("Pagination does not have current property");
+   }
+
    if ("kind" in pagination) {
       switch (pagination.kind) {
          case "start":
@@ -57,12 +67,7 @@ export default component$(() => {
                      <span></span>
                   </Link>
                   <span class={styles.page_num}>{pagination.current}</span>
-                  <Link
-                     href={urlParamsStr.replace(
-                        /(page=)\d+/,
-                        `$1${pagination.current + 1}`
-                     )}
-                     class={styles.pag_next}>
+                  <Link href={nextPageUrl.toString()} class={styles.pag_next}>
                      <span></span>
                   </Link>
                </div>
@@ -70,21 +75,11 @@ export default component$(() => {
          case "medium":
             return (
                <div class={styles.pagination}>
-                  <Link
-                     href={urlParamsStr.replace(
-                        /(page=)\d+/,
-                        `$1${pagination.current - 1}`
-                     )}
-                     class={styles.pag_prev}>
+                  <Link href={prevPageUrl.toString()} class={styles.pag_prev}>
                      <span></span>
                   </Link>
                   <span class={styles.page_num}>{pagination.current}</span>
-                  <Link
-                     href={urlParamsStr.replace(
-                        /(page=)\d+/,
-                        `$1${pagination.current + 1}`
-                     )}
-                     class={styles.pag_next}>
+                  <Link href={nextPageUrl.toString()} class={styles.pag_next}>
                      <span></span>
                   </Link>
                </div>
@@ -92,12 +87,7 @@ export default component$(() => {
          case "end":
             return (
                <div class={styles.pagination}>
-                  <Link
-                     href={urlParamsStr.replace(
-                        /(page=)\d+/,
-                        `$1${pagination.current - 1}`
-                     )}
-                     class={styles.pag_prev}>
+                  <Link href={prevPageUrl.toString()} class={styles.pag_prev}>
                      <span></span>
                   </Link>
                   <span class={styles.page_num}>{pagination.current}</span>
