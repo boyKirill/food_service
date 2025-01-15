@@ -1,0 +1,162 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 400px;
+    position: relative;
+}
+
+.sign_in{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.top{
+    padding-bottom: 16px;
+}
+
+.sign_in h1{
+    font-family: var(--font-family);
+    font-weight: 300;
+    font-size: 33px;
+    line-height: 127%;
+    letter-spacing: 0.01em;
+    color: var(--main-color);
+    padding-bottom: 10px;
+}
+.sign_in p{
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: var(--body-text);
+    max-width: 275px;
+}
+
+.sign_in_form{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 24px 0 20px 0;
+    gap: 18px;
+}
+.sign_in_form label{
+    display: grid;
+    grid-template-columns: 1fr;
+    font-family: var(--font-family);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--body-text);
+    border-bottom: 1px solid #F3F2F2;
+    gap: 8px;
+}
+.sign_in_form input{
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+    color: var(--main-color);
+}
+
+.reset_pass{
+    font-family: var(--font-family);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: -0.02em;
+    color: var(--main-color);
+    text-align: center;
+    opacity: 0.64;
+}
+
+.submit_btn{
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 171%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--bg-color);
+    border-radius: 8px;
+    background: var(--active-color---1);
+    padding: 15px 0;
+    margin: 24px 0 20px 0;
+}
+
+.new_acc_container{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template:
+        'h_a_q  ....    c_n_a'
+        't_f_a  t_f_a   t_f_a' 
+        'fbook  fbook   fbook'
+        'goo    goo    goo' / 1fr 20px 1fr;
+}
+
+.have_acc_question{
+    grid-area: h_a_q;
+    font-family: var(--font-family);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: -0.02em;
+    color: var(--main-color);
+    opacity: 0.64;
+    text-align: right;
+}
+
+.cre_new_acc{
+    grid-area: c_n_a;
+    font-family: var(--font-family);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: -0.02em;
+    color: var(--active-color---1);
+}
+.text_for_alt{
+    grid-area: t_f_a;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: var(--main-color);
+    opacity: 0.64;
+    padding: 20px 0 24px 0;
+}
+.facebook, .google{
+    grid-area: goo;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--bg-color);
+    border-radius: 8px;
+    padding: 12px 0;
+}
+
+.facebook{
+    grid-area: fbook;
+    background-color: ;
+    margin-bottom: 16px;
+    background: #395998 url('/public/facebook.svg') 10px center no-repeat;
+}
+
+.google{
+    grid-area: goo;
+    background: #4285F4 url('/public/google.svg') 10px center no-repeat;
+}

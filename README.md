@@ -1,3 +1,6 @@
+Верстка по макету из фигма
+https://www.figma.com/community/file/992304109173819815/tamang-food-service-food-ordering-app-ui-kits
+
 # Qwik City App ⚡️
 
 - [Qwik Docs](https://qwik.dev/)
