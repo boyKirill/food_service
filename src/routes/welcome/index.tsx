@@ -14,7 +14,7 @@ export default component$(() => {
                 <h2>Welcome</h2>
                 <p>It’s a pleasure to meet you. We are excited that you’re here so let’s get started!</p>
             </secttion>
-            <a class={styles.get_started_link} href="/walkthrough_1">Get Started</a>
+            <a class={styles.get_started_link} href="/walkthrough">Get Started</a>
        </div>
     </>)
 })

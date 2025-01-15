@@ -16,14 +16,15 @@ export default component$(() => {
                     <label>
                         <span>Email address</span>
                         <input type="email" name='email' placeholder='food.service@gmail.com' required/>
+                        <div class={styles.validity_icon}></div>
                     </label>
-                    <label>
+                    <label> 
                         <span>Password</span>
                         <input type="password" name="password" minlength="8" placeholder='!shd34A4k' required/>
                     </label>
                 </form>
-                <a href="/reset_pass" class={styles.reset_pass}>Forget Password?</a>
-                <button class={styles.submit_btn} type="submit" form="sign_in_form" value="Submit">Submit</button>
+                <a href="/forgotpass" class={styles.reset_pass}>Forget Password?</a>
+                <button class={styles.submit_btn} type="submit" form="sign_in_form" value="Submit">Sign in</button>
                 <div class={styles.new_acc_container}>
                     <span class={styles.have_acc_question}>Don’t have account?</span>
                     <a href="/cre_new_acc" class={styles.cre_new_acc}>Create new account.</a>
