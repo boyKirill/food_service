@@ -21,7 +21,7 @@ export default component$(() => {
                     </label>
                     <label> 
                         <span>Password</span>
-                        <input type="password" name="password" minlength="8" placeholder='!shd34A4k' required/>
+                        <input type="password" name="password" minLength={8} placeholder='!shd34A4k' required/>
                         <div class={styles.validity_icon}></div>
                     </label>
                 </form>

@@ -1,0 +1,118 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 400px;
+    position: relative;
+}
+
+.login_phone{
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    padding-bottom: 16px;
+}
+
+.back_link{
+    width: 24px;
+    height: 24px;
+    display: block;
+    background: url('/public/back.svg');
+}
+
+.page_name{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: var(--main-color);
+    white-space: nowrap;
+}
+
+.login_phone h1{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--main-color);
+}
+.login_phone p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: var(--body-text);
+   display: flex;
+    text-align: center;
+}
+
+.login_phone_form{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 24px 0 20px 0;
+    gap: 18px;
+    padding-bottom: 24px;
+}
+.login_phone_form label{
+    display: grid;
+    align-items: center;
+    grid-template:
+    'inp_name inp_name'
+    'input    val_ic' / 
+    1fr auto;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--body-text);
+    border-bottom: 1px solid #F3F2F2;
+}
+.login_phone_form span{
+    grid-area: inp_name;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+.login_phone_form input{
+    grid-area: input;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+    color: var(--main-color);
+    padding: 9px 0;
+}
+
+.validity_icon{
+    grid-area: val_ic;
+}
+  
+input:valid + .validity_icon::before {
+    content: '✓';
+    color: var(--active-color---1);
+    font-size: 23px;
+}
+
+.submit_btn{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 171%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--bg-color);
+    border-radius: 8px;
+    background: var(--active-color---1);
+    padding: 15px 0;
+}
