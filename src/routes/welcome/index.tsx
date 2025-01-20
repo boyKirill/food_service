@@ -1,5 +1,6 @@
 import { component$ }  from '@builder.io/qwik';
 import styles from "./welcome.module.css";
+import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
     return( 
@@ -14,7 +15,7 @@ export default component$(() => {
                 <h2>Welcome</h2>
                 <p>It’s a pleasure to meet you. We are excited that you’re here so let’s get started!</p>
             </secttion>
-            <a class={styles.get_started_link} href="/walkthrough">Get Started</a>
+            <Link class={styles.get_started_link} href="/walkthrough">Get Started</Link>
        </div>
     </>)
 })

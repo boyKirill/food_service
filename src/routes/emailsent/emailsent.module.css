@@ -47,57 +47,19 @@
     padding-bottom: 10px;
 }
 .forgot_pass p{
-    font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: -0.03em;
     color: var(--body-text);
     max-width: 275px;
+    padding-bottom: 33px;
 }
 
-.forgot_pass_form{
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 24px 0 20px 0;
-    gap: 18px;
-    padding-bottom: 24px;
-}
-.forgot_pass_form label{
-    display: grid;
-    align-items: center;
-    grid-template:
-    'inp_name inp_name'
-    'input    val_ic' / 
-    1fr auto;
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 167%;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--body-text);
-    border-bottom: 1px solid #F3F2F2;
-}
-.forgot_pass_form span{
-    grid-area: inp_name;
-}
-
-.forgot_pass_form input{
-    grid-area: input;
+.help_link{
     font-size: 16px;
     line-height: 150%;
-    letter-spacing: -0.02em;
-    color: var(--main-color);
-    padding: 9px 0;
-}
-
-.validity_icon{
-    grid-area: val_ic;
-}
-  
-input:valid + .validity_icon::before {
-    content: '✓';
+    letter-spacing: -0.03em;
     color: var(--active-color---1);
-    font-size: 23px;
 }
 
 .submit_btn{
@@ -111,4 +73,9 @@ input:valid + .validity_icon::before {
     border-radius: 8px;
     background: var(--active-color---1);
     padding: 15px 0;
+
+}
+
+.forgot_pass img{
+    padding: 100px 15px 15px 15px;
 }

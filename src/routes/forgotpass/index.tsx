@@ -1,12 +1,13 @@
 import { component$ }  from '@builder.io/qwik';
 import styles from "./forgotpass.module.css";
+import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
     return( 
     <>
        <div class={styles.wrapper}>
             <div class={styles.top}>
-                <a href="/walkthrough/#walkthrough3" class={styles.back_link}></a>
+                <Link href="/signin" class={styles.back_link}></Link>
                 <div class={styles.page_name}>Forgot Password</div>
             </div>
             <section class={styles.forgot_pass}>

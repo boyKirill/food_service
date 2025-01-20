@@ -1,5 +1,6 @@
 import { component$ }  from '@builder.io/qwik';
 import styles from "./walkthrough.module.css";
+import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
     return( 
@@ -17,11 +18,11 @@ export default component$(() => {
                     <p>Order from the best local restaurants with easy, on-demand delivery.</p>
                 </secttion>
                 <div class={styles.indicators}>
-                    <a class={styles.active} href="#walkthrough1"></a>
-                    <a href="#walkthrough2"></a>
-                    <a href="#walkthrough3"></a>
+                    <Link class={styles.active} href="#walkthrough1"></Link>
+                    <Link href="#walkthrough2"></Link>
+                    <Link href="#walkthrough3"></Link>
                 </div>
-                <a class={styles.get_started_link} href="#walkthrough2">Get Started</a>
+                <Link class={styles.get_started_link} href="#walkthrough2">Get Started</Link>
             </div>
             </div>
                 <div id='walkthrough2' class={styles.slide}>
@@ -36,11 +37,11 @@ export default component$(() => {
                         <p>Free delivery for new customers via Apple Pay and others payment methods.</p>
                     </secttion>
                     <div class={styles.indicators}>
-                        <a href="#walkthrough1"></a>
-                        <a class={styles.active} href="#walkthrough2"></a>
-                        <a href="#walkthrough3"></a>
+                        <Link href="#walkthrough1"></Link>
+                        <Link class={styles.active} href="#walkthrough2"></Link>
+                        <Link href="#walkthrough3"></Link>
                     </div>
-                    <a class={styles.get_started_link} href="#walkthrough3">Get Started</a>
+                    <Link class={styles.get_started_link} href="#walkthrough3">Get Started</Link>
                     </div>
                 </div>
             <div id='walkthrough3' class={styles.slide}>
@@ -55,11 +56,11 @@ export default component$(() => {
                         <p>Easily find your type of food craving and you’ll get delivery in wide range.</p>
                     </secttion>
                     <div class={styles.indicators}>
-                        <a href="#walkthrough1"></a>
-                        <a href="#walkthrough2"></a>
-                        <a class={styles.active} href="#walkthrough3"></a>
+                        <Link href="#walkthrough1"></Link>
+                        <Link href="#walkthrough2"></Link>
+                        <Link class={styles.active} href="#walkthrough3"></Link>
                     </div>
-                    <a class={styles.get_started_link} href="/signin">Get Started</a>
+                    <Link class={styles.get_started_link} href="/signin">Get Started</Link>
                 </div>
             </div>
         </div>
