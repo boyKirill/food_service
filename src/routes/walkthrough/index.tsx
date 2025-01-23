@@ -9,10 +9,10 @@ export default component$(() => {
             <div id='walkthrough1' class={styles.slide}>
                 <div class={styles.wrapper}>
                 <div class={styles.logo}>
-                    <img src="/public/logo.svg" alt="Логотип компании Tamang FoodService" />
+                    <img src="/logo.svg" alt="Логотип компании Tamang FoodService" />
                     <h1>Tamang<br />FoodService</h1>
                 </div>
-                <img src="/public/walkthrough/i1.png" alt="Картинка как девушка обнимает мороженое" />
+                <img src="/walkthrough/i1.png" alt="Картинка как девушка обнимает мороженое" />
                 <secttion class={styles.info}>
                     <h2>All your favorites</h2>
                     <p>Order from the best local restaurants with easy, on-demand delivery.</p>
@@ -28,10 +28,10 @@ export default component$(() => {
                 <div id='walkthrough2' class={styles.slide}>
                 <div class={styles.wrapper}>
                     <div class={styles.logo}>
-                        <img src="/public/logo.svg" alt="Логотип компании Tamang FoodService" />
+                        <img src="/logo.svg" alt="Логотип компании Tamang FoodService" />
                         <h1>Tamang<br />FoodService</h1>
                     </div>
-                    <img src="/public/walkthrough/i2.png" alt="Картинка как девушка обнимает мороженое" />
+                    <img src="/walkthrough/i2.png" alt="Картинка как девушка обнимает мороженое" />
                     <secttion class={styles.info}>
                         <h2>Free delivery offers</h2>
                         <p>Free delivery for new customers via Apple Pay and others payment methods.</p>
@@ -47,10 +47,10 @@ export default component$(() => {
             <div id='walkthrough3' class={styles.slide}>
                 <div class={styles.wrapper}>
                     <div class={styles.logo}>
-                        <img src="/public/logo.svg" alt="Логотип компании Tamang FoodService" />
+                        <img src="/logo.svg" alt="Логотип компании Tamang FoodService" />
                         <h1>Tamang<br />FoodService</h1>
                     </div>
-                    <img src="/public/walkthrough/i3.png" alt="Картинка как девушка обнимает мороженое" />
+                    <img src="/walkthrough/i3.png" alt="Картинка как девушка обнимает мороженое" />
                     <secttion class={styles.info}>
                         <h2>Choose your food</h2>
                         <p>Easily find your type of food craving and you’ll get delivery in wide range.</p>
