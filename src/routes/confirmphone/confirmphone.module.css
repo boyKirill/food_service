@@ -1,0 +1,170 @@
+
+.unvisible{
+    position: fixed;
+    left: 100%;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 400px;
+    position: relative;
+}
+
+.login_phone{
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    padding-bottom: 16px;
+}
+
+.back_link{
+    width: 24px;
+    height: 24px;
+    display: block;
+    background: url('/public/back.svg');
+}
+
+.page_name{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: var(--main-color);
+    white-space: nowrap;
+}
+
+.login_phone h1{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--main-color);
+}
+.login_phone p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    color: var(--body-text);
+   display: flex;
+    text-align: center;
+}
+
+.login_phone_form{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 24px 0 20px 0;
+    gap: 34px;
+    padding-bottom: 24px;
+}
+
+.inputs_container{
+    display: grid;
+    max-width: 260px;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 auto;
+    gap: 20px;
+    background-image: linear-gradient(#fff, #fafafa, #fff);
+}
+.login_phone_form label{
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+.login_phone_form input{
+    font-family: var(--font-family);
+    grid-area: input;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+    color: var(--main-color);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-bottom: 1px solid #868686;
+    text-align: center;
+}
+
+.submit_btn{
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 171%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--bg-color);
+    border-radius: 8px;
+    background: var(--active-color---1);
+    padding: 15px 0;
+}
+
+.question_answer{
+    display: flex;
+    gap: 10px;
+    padding-bottom: 34px;
+    justify-content: center;
+}
+
+.question{
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: -0.02em;
+    color: var(--main-color);
+    opacity: 0.64;
+}
+
+.answer{
+    font-family: var(--font-family);
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 167%;
+    letter-spacing: -0.02em;
+    color: var(--active-color---1);
+    background-color: transparent;
+}
+
+.privacy_policy{
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: var(--body-text);
+    display: grid;
+    grid-template: 
+    ". priv_pol_text ." / 45px 1fr 45px ;
+}
+
+.privacy_policy span{
+    grid-area: priv_pol_text;
+}
+
+
+/* убрать стрелки  */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; 
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
+}

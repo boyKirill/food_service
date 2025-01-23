@@ -1,16 +1,101 @@
 {
-  "posts": [
+  "loginphone": [
     {
-      "id": "2",
-      "title": "another title",
-      "views": 200
+      "id": "c536",
+      "phone": "89278677252"
+    },
+    {
+      "id": "effb",
+      "phone": "23232334343"
+    },
+    {
+      "id": "ab86",
+      "phone": "45454545454"
+    },
+    {
+      "id": "dc25",
+      "phone": "89278677253"
+    },
+    {
+      "id": "b041",
+      "phone": "23232334343"
+    },
+    {
+      "id": "1ada",
+      "phone": "34345345345"
+    },
+    {
+      "id": "f8bf",
+      "phone": "23232334343"
+    },
+    {
+      "id": "18f7",
+      "phone": "11111111111"
     }
   ],
-  "phones": [
+  "forgotpass": [
     {
-      "id": "8373",
-      "name": "",
-      "email": ""
+      "id": "6cf0",
+      "email": "shfjsjuwef@suhdvi"
+    },
+    {
+      "id": "7d91",
+      "email": "sdfsdfsd@dg"
+    },
+    {
+      "id": "9b66",
+      "email": "iuewugd@dfyw"
+    },
+    {
+      "id": "fbf4",
+      "email": "vkvkv@gmail.com",
+      "password": "hvhwyuwew"
+    }
+  ],
+  "signup": [
+    {
+      "id": "667f",
+      "text": "kirill",
+      "email": "kirill@g.com",
+      "password": "wedwedwe"
+    },
+    {
+      "id": "519c",
+      "text": "kirill",
+      "email": "sdfsdfsd@dg",
+      "password": "wdqwdqwd"
+    },
+    {
+      "id": "8aed",
+      "text": "kirill",
+      "email": "vkv@mworx.ru",
+      "password": "wdwqdqwdqwdqw"
+    },
+    {
+      "id": "edc0",
+      "text": "kirill",
+      "email": "sdfsdfsd@dg",
+      "password": "2323e22323233"
+    }
+  ],
+  "confirmphone": [
+    {
+      "id": "0b39",
+      "confirmPhoneCode": {
+        "code": "1111"
+      }
+    },
+    {
+      "id": "6618",
+      "confirmPhoneCode": {
+        "code": "2222"
+      }
+    },
+    {
+      "id": "1608",
+      "confirmPhoneCode": {
+        "code": "1111"
+      }
     }
   ]
 }

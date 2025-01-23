@@ -13,7 +13,7 @@ export default component$(() => {
             <section class={styles.forgot_pass}>
                 <h1>Reset email sent</h1>
                 <p>We have sent a instructions email to sajin tamang@figma.com. <a href="/help" class={styles.help_link}>Having problem?</a></p>
-                <button class={styles.submit_btn} type="submit" form="forgot_pass_form" value="Submit">Sign in</button>
+                <button class={styles.submit_btn} type="submit" form="forgot_pass_form" value="Submit">Send again</button>
                 <img src="/public/coffee_girl.png" alt="Картинка как девушка чашечку кофе" />
             </section>
        </div>

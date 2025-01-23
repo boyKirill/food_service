@@ -1,8 +1,39 @@
-import { component$ }  from '@builder.io/qwik';
+import { $, component$ }  from '@builder.io/qwik';
 import styles from "./signup.module.css";
-import { Link } from '@builder.io/qwik-city';
+import { Link, useNavigate } from '@builder.io/qwik-city';
 
 export default component$(() => {
+const navigate = useNavigate();
+      
+    const handleSubmit = $(async (e: Event) => {
+        const form = e.target as HTMLFormElement | null
+
+        if(form){
+            const formData = new FormData(form);
+            const formDataObj = Object.fromEntries(formData);
+            
+            try{
+                const response = await fetch('http://localhost:3000/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formDataObj),
+                    });
+
+                if(!response.ok){
+                    console.error('Ошибка сервера:', response.status);
+                    alert(`Ошибка:'Не удалось отправить данные'`);
+                    return;
+                }
+            } catch(e){
+                console.error('Ошибка сети или выполнения:', e);
+            }
+
+            navigate('/loginphone');
+        } else {
+            throw Error("Произошла ошибка!")
+        }
+    })
+
     return( 
     <>
        <div class={styles.wrapper}>
@@ -13,10 +44,10 @@ export default component$(() => {
             <section class={styles.sign_up}>
                 <h1>Create Account</h1>
                 <p>Enter your Name, Email and Password for sign up. <Link href='/signin' class={styles.alredy_have_acc}>Already have account?</Link></p>
-                <form action="" class={styles.sign_up_form}  id="sign_up_form">
+                <form action="" onSubmit$={handleSubmit} preventdefault:submit class={styles.sign_up_form}  id="sign_up_form">
                     <label>
                         <span>Full name</span>
-                        <input type="text" name='email' placeholder='Sajin Tamang' required/>
+                        <input type="text" name='text' placeholder='Sajin Tamang' required/>
                         <div class={styles.validity_icon}></div>
                     </label>
                     <label>
