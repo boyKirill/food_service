@@ -7,10 +7,10 @@ export default component$(() => {
     <>
        <div class={styles.wrapper}>
             <div class={styles.logo}>
-                <img src="/public/logo.svg" alt="Логотип компании Tamang FoodService" />
+                <img src="./public/logo.svg" alt="Логотип компании Tamang FoodService" />
                 <h1>Tamang<br />FoodService</h1>
             </div>
-            <img src="/public/welcome_icecream.png" alt="Картинка как девушка обнимает мороженое" />
+            <img src="./public/welcome_icecream.png" alt="Картинка как девушка обнимает мороженое" />
             <secttion class={styles.info}>
                 <h2>Welcome</h2>
                 <p>It’s a pleasure to meet you. We are excited that you’re here so let’s get started!</p>
