@@ -1,0 +1,71 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: minmax(300px, 450px);
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    justify-content: center;
+}
+
+.login_phone{
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 16px;
+}
+
+.back_link{
+    width: 24px;
+    height: 24px;
+    display: block;
+    background: url('/public/back.svg');
+}
+
+.page_name{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: var(--main-color);
+    white-space: nowrap;
+}
+
+.rest{
+    display: grid;
+   width: 100%;
+}
+
+.rest_slider{
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-snap-type: inline mandatory;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    scroll-snap-align: start;
+    transition: transform 0.5s ease-in-out;
+}
+.slide img{
+    inline-size: 100%;
+    aspect-ratio: 1/1.15;
+    object-fit: contain ;
+}

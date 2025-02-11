@@ -1,0 +1,44 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}
+
+.login_phone{
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 16px;
+}
+
+.back_link{
+    width: 24px;
+    height: 24px;
+    display: block;
+    background: url('/public/back.svg');
+}
+
+.page_name{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: var(--main-color);
+    white-space: nowrap;
+}
+
+.food_cards_list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 24px 20px;
+    overflow: auto;
+}

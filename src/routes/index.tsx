@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import { Link, routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import styles from "./index.module.css";
 
 import Menu from "~/components/Menu/menu";
@@ -97,13 +97,13 @@ export default component$(() => {
                <section class={styles.slider}>
                   <div class={styles.section_header}>
                      <h2 class={styles.section_name}>Featured Partners</h2>
-                     <a href="/" class={styles.see_all}>
+                     <Link href="/f_partners" class={styles.see_all}>
                         See all
-                     </a>
+                     </Link>
                   </div>
                   <section class={[styles.media_scroller, styles.snaps_inline]}>
                      <h3 class="invisible">Карточки товара для партнеров</h3>
-                     <CardMedium data={signalTeamRest.value} />
+                     <CardMedium data={signalPartnersRest.value} />
                   </section>
                </section>
                <section class={styles.banner}>
@@ -128,7 +128,7 @@ export default component$(() => {
                      <h3 class="invisible">
                         Карточки товара для командных ресторанов
                      </h3>
-                     <CardMedium data={signalPartnersRest.value} />
+                     <CardMedium data={signalTeamRest.value} />
                   </section>
                </section>
                <section class={styles.columns}>

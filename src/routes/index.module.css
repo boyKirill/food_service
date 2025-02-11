@@ -124,7 +124,7 @@
 
 /*banner*/
 .banner {
-   margin: 0 20px;
+   margin: 34px 20px;
    border-radius: 12px;
    background: url("/public/Banner.png") center center/ cover no-repeat;
    display: flex;

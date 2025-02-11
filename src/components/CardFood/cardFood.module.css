@@ -1,0 +1,122 @@
+.list_item{
+  display: flex;
+  justify-content: center;
+}
+.card_container {
+  position: relative;
+  max-width: 260px;
+  width: 100%;
+}
+.card_link {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+.institution_img_box{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5,1fr);
+}
+.institution_img_box img {
+  inline-size: 100%;
+  aspect-ratio: 9/16;
+  border-radius: 10px;
+  object-fit: cover;
+  grid-row: 1/-1;
+  grid-column: 1 /-1;
+}
+.institution_name {
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: var(--main-color);
+  padding-top: 8px;
+}
+.kitchen_list{
+ 
+  column-gap: 13px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.kitchen_list li{
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: var(--body-text);
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap:8px;
+}
+.kitchen_list li::before{
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--body-text);
+}
+.institution_info {
+  display: grid;
+  grid-template:
+  "waiting_time ."
+  "order_type mark" /1fr auto;
+  align-items: center;
+  grid-area: inst_info;
+  grid-row: 5/-1;
+  grid-column: 1 / -1;
+  padding: 0 14px 10px 14px;
+}
+.institution_info section {
+  display: flex;
+}
+
+.institution_info section:nth-child(1){
+  grid-area: mark;
+}
+.institution_info section:nth-child(2){
+  grid-area: waiting_time;
+}
+.institution_info section:nth-child(3){
+  grid-area: order_type;
+}
+.mark {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: center;
+  color: var(--bg-color);
+  background: var(--active-color---1);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.waiting_time,
+.order_type {
+  font-size: 12px;
+  line-height: 167%;
+  letter-spacing: -0.02em;
+  color: var(--bg-color);
+  white-space: nowrap;
+}
+.waiting_time{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.waiting_time::before{
+  content: url("/public/fast-delivery.svg");
+  width: 16px;
+  height: 16px;
+}
+.order_type {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.order_type::before {
+  content: url("/public/dollar_white.svg");
+  width: 16px;
+  height: 16px;
+}
